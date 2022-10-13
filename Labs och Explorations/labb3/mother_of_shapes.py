@@ -46,7 +46,27 @@ def center_point_y(self, value:float | int):
             raise TypeError(f"Number must be a number, not {type(value)}")
 
 
+
 ############################################################################OVERLOADERS
+    def __lt__(self, other):
+            
+            return self.area < other.area
+
+    def __gt__(self, other):
+            
+            return self.area > other.area
+
+    def __le__(self, other):
+            
+            return self.area <= other.area
+
+    def __ge__(self, other):
+            
+            return self.area >= other.area
+
+    def __ne__(self, other): 
+        
+            return self.area != other.area
 
 
 ###############################################################################################
@@ -107,25 +127,7 @@ class Circle(Mother_Class_Of_Shapes):
             return print("The two Circles are the SAME size")
         else: return print ("The two Circles are NOT the same size")
 ###################################################################overload
-    def __lt__(self, other):
-            
-            return self.area < other.area
 
-    def __gt__(self, other):
-            
-            return self.area > other.area
-
-    def __le__(self, other):
-            
-            return self.area <= other.area
-
-    def __ge__(self, other):
-            
-            return self.area >= other.area
-
-    def __ne__(self, other): 
-        
-            return self.area != other.area
 
 ######################################################
 ######################################## Reper and Str
