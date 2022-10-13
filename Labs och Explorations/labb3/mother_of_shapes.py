@@ -1,3 +1,7 @@
+from __future__ import annotations
+import matplotlib.pyplot as plt
+import math
+
 class Mother_Class_Of_Shapes:
     def __init__(self, center_point_x:float, center_point_y:float):
         self.center_point_x = center_point_x
@@ -42,8 +46,11 @@ def center_point_y(self, value:float | int):
             raise TypeError(f"Number must be a number, not {type(value)}")
 
 
+############################################################################OVERLOADERS
 
 
+###############################################################################################
+###############################################################################################
 class Circle(Mother_Class_Of_Shapes):
     def __init__(self, radius:float, center_point_x: float, center_point_y: float):
         super().__init__(center_point_x, center_point_y)
@@ -99,9 +106,28 @@ class Circle(Mother_Class_Of_Shapes):
         if (self.radius == value.radius):
             return print("The two Circles are the SAME size")
         else: return print ("The two Circles are NOT the same size")
+###################################################################overload
+    def __lt__(self, other):
+            
+            return self.area < other.area
 
+    def __gt__(self, other):
+            
+            return self.area > other.area
 
+    def __le__(self, other):
+            
+            return self.area <= other.area
 
+    def __ge__(self, other):
+            
+            return self.area >= other.area
+
+    def __ne__(self, other): 
+        
+            return self.area != other.area
+
+######################################################
 ######################################## Reper and Str
     def __repr__(self):
         return (self.center_point_x,self.center_point_y, self.radius) 
@@ -110,6 +136,8 @@ class Circle(Mother_Class_Of_Shapes):
         return (f"Rectangles X-position is: {self.center_point_x} Y-position is: {self.center_point_y}  the radius {self.radius}")
 
 
+##############################################################################################################################################################################################
+##############################################################################################################################################################################################
 
 class Rectangle(Mother_Class_Of_Shapes): 
     """Creates rectangle, plots rectangle calculates area, calculates circumference"""
