@@ -6,7 +6,7 @@ class Mother_Class_Of_Shapes:
     def __init__(self, center_point_x:float, center_point_y:float):
         self.center_point_x = center_point_x
         self.center_point_y = center_point_y
-        
+        self.area = 0
 
 #######################transalte
     def transalte(self, x_offsett, y_offsett):
@@ -18,12 +18,31 @@ class Mother_Class_Of_Shapes:
      self.center_point_x = x_offsett
      self.center_point_y = y_offsett
 
+
+#### OVERLOADERS
+
+    def __lt__(self, other):
+        return self.area < other.area
+
+    def __gt__(self, other):
+        return self.area > other.area
+
+    def __le__(self, other):
+        return self.area <= other.area
+
+    def __ge__(self, other):
+        return self.area >= other.area
+
+    def __ne__(self, other): 
+        return self.area != other.area
+
+
+
+
+
+        
 ##############################################################
-    def __repr__(self) -> str:
-        return (f"This class has no function on its own, the values represent a X and a Y value in a coordinate system")
-    
-    def __str__(self) -> str:
-        return (f"Hi user, this class has no function for you. Try: newRectangle = Rectangle(2, 2, 0, 0) or, newcircle = Circle(1,1,1)")
+ 
 ############################################################
 #GETTER SETTER X
 @property
@@ -48,29 +67,29 @@ def center_point_y(self, value:float | int):
 
 
 ############################################################################OVERLOADERS
-    def __lt__(self, other):
-            
-            return self.area < other.area
-
-    def __gt__(self, other):
-            
-            return self.area > other.area
-
-    def __le__(self, other):
-            
-            return self.area <= other.area
-
-    def __ge__(self, other):
-            
-            return self.area >= other.area
-
-    def __ne__(self, other): 
-        
-            return self.area != other.area
-
+def __repr__(self) -> str:
+        return (f"This class has no function on its own, the values represent a X and a Y value in a coordinate system")
+    
+def __str__(self) -> str:
+        return (f"Hi user, this class has no function for you. Try: newRectangle = Rectangle(2, 2, 0, 0) or, newcircle = Circle(1,1,1)")
 
 ###############################################################################################
 ###############################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# CIRCLE CIRCLE CIRCLE
 class Circle(Mother_Class_Of_Shapes):
     def __init__(self, radius:float, center_point_x: float, center_point_y: float):
         super().__init__(center_point_x, center_point_y)
@@ -87,12 +106,15 @@ class Circle(Mother_Class_Of_Shapes):
         if not isinstance(value, (int, float)):
             raise TypeError(f"Number must be a number, not {type(value)}")
         self._radius = value
+        self.area = {math.pi * self.radius**2} 
  ####################################################################               
 
     def circle_area(self):
+        """calculates area"""
         return print(f"The area is of the circle equals: {math.pi * self.radius**2}")
     
     def circle_circumference(self):
+        """calculates circumference"""
         return print(f"The circumference is of the circle equals: {2 * math.pi * self.radius**2}")
 
 
@@ -119,37 +141,44 @@ class Circle(Mother_Class_Of_Shapes):
             print(f"The distance from the center of circle is :{dista} units")
     
     def is_unit_circle(self):
+        """checks if circle is a unit circle"""
         if ((self.center_point_y | self.center_point_x == 0) and (self.radius == 1)):
             print("Its a unit-circle")
 
     def __eq__(self, value): ##  Code heavily inspierd by Daniel Nillson: exercise 12 fractions
+        """check if circle is the same size"""
         if (self.radius == value.radius):
             return print("The two Circles are the SAME size")
         else: return print ("The two Circles are NOT the same size")
 ###################################################################
 
-
-######################################################
 ######################################## Reper and Str
     def __repr__(self):
         return (self.center_point_x,self.center_point_y, self.radius) 
 
     def __str__(self) -> str:
-        return (f"Rectangles X-position is: {self.center_point_x} Y-position is: {self.center_point_y}  the radius {self.radius}")
+        return (f"Circle X-position is: {self.center_point_x} Y-position is: {self.center_point_y}  the radius {self.radius}")
 
 
 ##############################################################################################################################################################################################
 ################################################### RECTANGLE ###########################################################################################################################################
 
+
+
+
+# RECTANGLE RECTANGLE
+
+
 class Rectangle(Mother_Class_Of_Shapes): 
-    """Creates rectangle, plots rectangle calculates area, calculates circumference"""
+    """Contains: area/circumference calculator, plotter: creates depending on input a rectangle or square: checks if point in square, checks if square, checks is two squares the same """
     def __init__(self, height:float, width:float ,center_point_x: float, center_point_y: float, ):
         super().__init__(center_point_x, center_point_y)
         
         self.height = height
         self.width = width
+        
 
-    #GETTER SETTER width
+
     #GETTER SETTER width
     @property
     def width(self) -> (int | float):
@@ -161,34 +190,42 @@ class Rectangle(Mother_Class_Of_Shapes):
         if not isinstance(value, (int, float)):
             raise TypeError(f"Number must be a number, not {type(value)}")
         self._width = value
+        self.height*self.width
+        self.area = {self.height*self.width} 
             
 
     #GETTER SETTER height
     @property
     def height(self) -> (int | float):
         """Width of rectangle"""
-        return self._width 
+        return self._width
+         
 
     @height.setter
     def height(self, value: (int | float)):
         if not isinstance(value, (int, float)):
             raise TypeError(f"Number must be a number, not {type(value)}")
         self._height = value
+        self.height*self.width
+        self.area = {self.height*self.width} 
     
 
     
  ##  ##################################################################### calculates area
     def rectangle_area(self):
+        """calculates area"""
         print("The Area of the square is:")
         return self.height*self.width
 
  ##  ###################################################################### Calucalte circumference
     def rectangle_circumference(self):
+        """calculates circumference"""
         print("The circumference is:")
         return self.height*2+self.width*2
 
  ##  ####################################################################### Check if it is a square 
     def Sqaure_checker(self):
+        """checks if shape is a perfect square"""
         if self.width == self.height:
             return print("It is a perceft square")
         else: return print("It is a rectangle but not a square")
@@ -196,7 +233,7 @@ class Rectangle(Mother_Class_Of_Shapes):
 ########################################################### ## creates rectangle in matplotlib
 ##########################################################  ### colour = coloring of rectangle as example, newRectangle.plot('b') defualt colour is black 
     def plot(self, colour = 'k'):
-        """plots circle"""
+        """plots rectanagle"""
 
         cornor_of_x = self.center_point_x -(self.width/2)
         cornor_of_y = self.center_point_y -(self.height/2)
@@ -209,6 +246,7 @@ class Rectangle(Mother_Class_Of_Shapes):
 
 ## ## looks if two rectangles are the same size
     def __eq__(self, value): ##  Code heavily inspierd by Daniel Nillson: exercise 12 fractions
+        """checks if two rectangle are the same size"""
         if (self.width == value.width) and (self.height == value.height):
             return print("The two rectangles are the SAME size")
         else: return print ("The two rectangles are NOT the same size")
@@ -217,7 +255,8 @@ class Rectangle(Mother_Class_Of_Shapes):
 ##############################################################################################
 
     def point_plot(self, point_x_positioner, point_y_positioner):
-
+        """checks if a point is withn the rectangle"""
+            
         ## plotter
         single_plot_point = plt.plot(point_x_positioner,point_y_positioner,'bo') 
         
@@ -230,10 +269,7 @@ class Rectangle(Mother_Class_Of_Shapes):
 ############################################################################
 #------------------------------------------------------------------------REPER----STR
     def __repr__(self):
-        return (self.width, self.height), (self.center_point_x),(self.center_point_y)
+        return (self.width, self.height), (self.center_point_x),(self.center_point_y) 
 
     def __str__(self) -> str: ##
         return f"width is: {self.width} and height is: {self.height}, X-position is: {self.center_point_x} Y-position is: {self.center_point_y}"
-
-
-
